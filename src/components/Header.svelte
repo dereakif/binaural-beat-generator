@@ -1,22 +1,45 @@
 <script>
-  let theme = 'solarized';
+  import { onMount } from 'svelte';
+  import daisyuiColors from 'daisyui/src/theming/themes';
+  import Theme from '../stores/ThemeStore';
+
   const themes = [
     { label: 'Solarized', value: 'solarized' },
     { label: 'Light', value: 'light' },
     { label: 'Dark', value: 'dark' },
-    { label: 'Forest', value: 'forest' },
     { label: 'Dim', value: 'dim' }
   ];
+
+  const setTheme = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme);
+    Theme.set({
+      name: theme,
+      primary: daisyuiColors[theme]?.primary || '#2aa198',
+      secondary: daisyuiColors[theme]?.secondary || '#2aa198'
+    });
+  };
+
+  onMount(() => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    setTheme(currentTheme);
+  });
+
   const changeTheme = (e) => {
     const newTheme = e.target.value;
-    theme = newTheme;
-    document.documentElement.setAttribute('data-theme', theme);
+    setTheme(newTheme);
   };
 </script>
 
-<header>
-  <div class="navbar bg-base-300 flex justify-between">
-    <span class="text-xl"> Binaural Beat Generator </span>
+<header class="bg-base-300">
+  <div class="navbar flex justify-between container px-16 mx-auto">
+    <div>
+      <img
+        src="/favicon.ico"
+        alt="pulsify"
+        class="w-8 h-8 inline-block mr-3"
+      />
+      <span class="text-2xl">pulsify</span>
+    </div>
     <div class="dropdown">
       <div tabindex="0" role="button" class="btn m-1">
         Theme
