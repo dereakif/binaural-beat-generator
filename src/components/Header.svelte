@@ -33,11 +33,7 @@
 <header class="bg-base-300">
   <div class="navbar flex justify-between container px-16 mx-auto">
     <div>
-      <img
-        src="/favicon.ico"
-        alt="pulsify"
-        class="w-8 h-8 inline-block mr-3"
-      />
+      <img src="/favicon.ico" alt="pulsify" class="w-8 h-8 inline-block mr-3" />
       <span class="text-2xl">pulsify</span>
     </div>
     <div class="dropdown">

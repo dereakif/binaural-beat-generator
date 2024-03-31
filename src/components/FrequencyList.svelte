@@ -198,7 +198,11 @@
   };
 </script>
 
-<div class="flex flex-wrap justify-center md:justify-between mt-10">
+<div bind:this={container}>
+  <canvas bind:this={canvas} />
+</div>
+
+<div class="flex flex-wrap justify-center md:justify-between mb-10">
   <div class="flex flex-col gap-6">
     <div class="card w-96 h-fit bg-neutral text-neutral-content">
       <div class="card-body">
@@ -298,8 +302,4 @@
       on:click={stopBeat}>Stop</button
     >
   </div>
-</div>
-
-<div bind:this={container}>
-  <canvas bind:this={canvas} />
 </div>

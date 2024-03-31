@@ -20,20 +20,20 @@
 </script>
 
 <div class="mb-24">
-{#each FAQ as { question, answer }, i}
-  <div class="collapse collapse-plus bg-base-200">
-    <input
-      type="radio"
-      name={question}
-      checked={i === selectedIndex}
-      on:change={() => (selectedIndex = i)}
-    />
-    <div class="collapse-title text-xl font-medium text-info">
-      {question}
+  {#each FAQ as { question, answer }, i}
+    <div class="collapse collapse-plus bg-base-200">
+      <input
+        type="radio"
+        name={question}
+        checked={i === selectedIndex}
+        on:change={() => (selectedIndex = i)}
+      />
+      <div class="collapse-title text-xl font-medium text-info">
+        {question}
+      </div>
+      <div class="collapse-content">
+        <p>{answer}</p>
+      </div>
     </div>
-    <div class="collapse-content">
-      <p>{answer}</p>
-    </div>
-  </div>
-{/each}
+  {/each}
 </div>
