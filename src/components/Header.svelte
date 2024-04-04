@@ -20,12 +20,17 @@
   };
 
   onMount(() => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    setTheme(currentTheme);
+    if (!localStorage.getItem('theme')) {
+      localStorage.setItem('theme', 'dark');
+      setTheme('dark');
+    } else {
+      setTheme(localStorage.getItem('theme'));
+    }
   });
 
   const changeTheme = (e) => {
     const newTheme = e.target.value;
+    localStorage.setItem('theme', newTheme);
     setTheme(newTheme);
   };
 </script>
@@ -55,7 +60,8 @@
             <input
               type="radio"
               name="theme-dropdown"
-              class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+              class="theme-controller btn btn-sm btn-block justify-start"
+              class:btn-primary={value === $Theme.name}
               aria-label={label}
               {value}
               on:change={changeTheme}
