@@ -5,7 +5,7 @@
 </script>
 
 <Header />
-<main class="mb-[52px] container px-16 mx-auto">
+<main class="mb-[52px] container px-4 sm:px-8 md:px-16 mx-auto">
   <FrequencyList />
   <Accordion />
 </main>
