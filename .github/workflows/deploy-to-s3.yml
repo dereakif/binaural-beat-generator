@@ -1,4 +1,4 @@
-name: Deploy Website to AWS S3
+name: Build and Deploy to AWS S3
 
 on:
   push:
@@ -6,22 +6,33 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
 
+    - name: Set up Bun
+      run: |
+        curl -fsSL https://bun.sh/install | bash
+        echo "$HOME/.bun/bin" >> $GITHUB_PATH
+
+    - name: Install Dependencies
+      run: bun install
+
+    - name: Build
+      run: bun dist
+
     - name: Deploy to S3
       uses: jakejarvis/s3-sync-action@v0.5.1
       with:
-        args: --follow-symlinks --delete --exclude '.git/*'
+        args: --follow-symlinks --delete --exclude '.*' --exclude 'node_modules/*' --exclude '*.md' --exclude 'LICENSE' --exclude 'package*.json' --exclude 'bun*' --exclude 'src/*'
       env:
         AWS_S3_BUCKET: ${{ secrets.S3_BUCKET }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: ${{ secrets.AWS_REGION }}
-        SOURCE_DIR: './'
+        SOURCE_DIR: 'dist/'  # Make sure this points to the directory with your built static files
 
     - name: Invalidate CloudFront Cache
       uses: chetan/invalidate-cloudfront-action@v1
