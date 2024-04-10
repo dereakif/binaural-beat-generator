@@ -19,10 +19,10 @@
   let phase = 0;
   let animationFrameId;
 
-  let gainNodeBinaural;
   let audioContext;
   let gainNodeLeft;
   let gainNodeRight;
+  let gainNodeMono;
 
   const output = {
     left: null,
@@ -137,12 +137,14 @@
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
     gainNodeLeft = audioContext.createGain();
     gainNodeRight = audioContext.createGain();
-    gainNodeBinaural = audioContext.createGain();
+    gainNodeMono = audioContext.createGain();
 
     if (!audioContext) {
       console.error('Web Audio API is not supported in this browser');
       return;
     }
+
+    const supportsStereoPanner = 'StereoPannerNode' in window;
 
     output.left = audioContext.createOscillator();
     output.right = audioContext.createOscillator();
@@ -153,24 +155,35 @@
     output.left.frequency.value = baseFrequency;
     output.right.frequency.value = baseFrequency + hz; // Create the binaural effect
 
-    // Create a stereo panner for left and right channels
-    const pannerLeft = new StereoPannerNode(audioContext, { pan: -1 });
-    const pannerRight = new StereoPannerNode(audioContext, { pan: 1 });
+    if (supportsStereoPanner) {
+      // Create a stereo panner for left and right channels
+      const pannerLeft = new StereoPannerNode(audioContext, { pan: -1 });
+      const pannerRight = new StereoPannerNode(audioContext, { pan: 1 });
 
-    // Connect the left oscillator to the left channel and to the GainNode
-    output.left
-      .connect(pannerLeft)
-      .connect(gainNodeLeft)
-      .connect(audioContext.destination);
+      // Connect the left oscillator to the left channel and to the GainNode
+      output.left
+        .connect(pannerLeft)
+        .connect(gainNodeLeft)
+        .connect(audioContext.destination);
 
-    // Connect the right oscillator to the right channel and to the GainNode
-    output.right
-      .connect(pannerRight)
-      .connect(gainNodeRight)
-      .connect(audioContext.destination);
+      // Connect the right oscillator to the right channel and to the GainNode
+      output.right
+        .connect(pannerRight)
+        .connect(gainNodeRight)
+        .connect(audioContext.destination);
+    } else {
+      // Mono output or fallback
+      const merger = audioContext.createChannelMerger(2); // Merge two channels into one
+
+      output.left.connect(gainNodeLeft).connect(merger, 0, 0); // Connect the left channel to the first input of the merger
+      output.right.connect(gainNodeRight).connect(merger, 0, 0); // Connect the right channel to the same input of the merger
+
+      merger.connect(gainNodeMono).connect(audioContext.destination); // Connect the merger to the mono gain node, then to the destination
+    }
 
     gainNodeLeft.gain.value = volume;
     gainNodeRight.gain.value = volume;
+    gainNodeMono.gain.value = volume;
 
     output.left.start();
     output.right.start();
