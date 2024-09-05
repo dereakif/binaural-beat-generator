@@ -1,12 +1,16 @@
-<script lang="js">
+<script>
+  import Canvas from './components/Canvas.svelte';
   import Header from './components/Header.svelte';
   import Accordion from './components/Accordion.svelte';
+  import List from './components/List.svelte';
   import FrequencyList from './components/FrequencyList.svelte';
 </script>
 
 <Header />
 <main class="mb-[52px] container px-4 sm:px-8 md:px-16 mx-auto">
+  <Canvas />
   <FrequencyList />
+  <List />
   <Accordion />
 </main>
 

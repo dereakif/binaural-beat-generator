@@ -1,0 +1,82 @@
+[
+  {
+    "waveName": "Delta",
+    "frequency": "2.5 Hz",
+    "baseFrequency": "432 Hz",
+    "title": "Deep Dreamless Sleep",
+    "subtitle": "For restful, non-REM sleep rejuvenation",
+    "category": "Sleep"
+  },
+  {
+    "waveName": "Theta",
+    "frequency": "6 Hz",
+    "baseFrequency": "528 Hz",
+    "title": "Meditative Immersion",
+    "subtitle": "For deep meditation and subconscious connection",
+    "category": "Meditation"
+  },
+  {
+    "waveName": "Alpha",
+    "frequency": "10 Hz",
+    "baseFrequency": "417 Hz",
+    "title": "Calm Focus",
+    "subtitle": "For relaxed alertness and stress reduction",
+    "category": "Relaxation"
+  },
+  {
+    "waveName": "Beta",
+    "frequency": "20 Hz",
+    "baseFrequency": "396 Hz",
+    "title": "Alert Engagement",
+    "subtitle": "For active problem-solving and wakefulness",
+    "category": "Focus"
+  },
+  {
+    "waveName": "Gamma",
+    "frequency": "40 Hz",
+    "baseFrequency": "852 Hz",
+    "title": "Peak Cognition",
+    "subtitle": "For advanced learning and sensory binding",
+    "category": "Learning"
+  },
+  {
+    "waveName": "Alpha",
+    "frequency": "11 Hz",
+    "baseFrequency": "639 Hz",
+    "title": "Mindful Repose",
+    "subtitle": "For stress release and gentle relaxation",
+    "category": "Relaxation"
+  },
+  {
+    "waveName": "Theta",
+    "frequency": "5 Hz",
+    "baseFrequency": "741 Hz",
+    "title": "Dream Weaver",
+    "subtitle": "For creativity and access to subconscious dreams",
+    "category": "Creativity"
+  },
+  {
+    "waveName": "Beta",
+    "frequency": "15 Hz",
+    "baseFrequency": "528 Hz",
+    "title": "Analytic Engine",
+    "subtitle": "For complex problem solving and analysis",
+    "category": "Focus"
+  },
+  {
+    "waveName": "Gamma",
+    "frequency": "80 Hz",
+    "baseFrequency": "963 Hz",
+    "title": "Peak Performance",
+    "subtitle": "For advanced cognitive function and memory formation",
+    "category": "Learning"
+  },
+  {
+    "waveName": "Delta",
+    "frequency": "2 Hz",
+    "baseFrequency": "174 Hz",
+    "title": "Inner Stillness",
+    "subtitle": "For deep restorative sleep and healing",
+    "category": "Sleep"
+  }
+]
