@@ -47,7 +47,7 @@ function createPlayerStore() {
           s.output.left.frequency.value = freq;
           s.output.right.frequency.value = freq + s.currentHz;
         }
-        return s;
+        return { ...s, baseFrequency: freq };
       }),
     initAudioContext: (audioContext) => {
       update((s) => {
